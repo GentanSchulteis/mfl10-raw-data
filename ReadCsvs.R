@@ -64,5 +64,7 @@ owners2015 %>% rbind(owners2016) %>% rbind(owners2017) %>%
   geom_col() +
   xlab("Draft Slot") +
   ylab("Count") +
-  ggtitle("2015-2017 MFL10 Wins by Draft Slot")
+  labs(title = "2015-2017 MFL10 Wins by Draft Slot",
+       caption = "Source: MyFantasyLeague.com")
+  
 
