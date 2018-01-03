@@ -55,11 +55,14 @@ playerscores2015$PlayerScoreID <- paste0(playerscores2015$PlayerScoreID, ".Y2015
 playerscores2015$PlayerID <- paste0(playerscores2015$PlayerID, ".Y2015")
 
 owners2015 %>% rbind(owners2016) %>% rbind(owners2017) %>% 
+  mutate(Year = str_sub(OwnerID, start = -4)) %>%
   filter(Rank == 1) %>%
-  group_by(FranchiseNumber) %>%
-  summarise(N = n()) %>% ungroup() %>%
-  ggplot(aes(x = factor(FranchiseNumber), y = N)) +
+  group_by(FranchiseNumber, Year) %>%
+  summarise(N = n()) %>% 
+  ungroup() %>%
+  ggplot(aes(x = factor(FranchiseNumber), y = N, fill = Year)) +
   geom_col() +
   xlab("Draft Slot") +
   ylab("Count") +
   ggtitle("2015-2017 MFL10 Wins by Draft Slot")
+
